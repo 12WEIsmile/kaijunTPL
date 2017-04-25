@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import { App } from './components/index.js';
+import Root from './routes.js';
 
 render(
-    <App />,
+    <Root />,
     document.getElementById("app")
 )
