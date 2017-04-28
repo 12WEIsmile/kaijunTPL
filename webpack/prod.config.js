@@ -32,7 +32,7 @@ module.exports = {
                     {
                         loader: "file-loader",
                         options: {
-                            name: "font/[name].[ext]"
+                            name: "font/[hash:16].[ext]"
                         }
                     }
                 ],
@@ -47,7 +47,7 @@ module.exports = {
                         loader: "url-loader",
                         options: {
                             limit: 8192,
-                            name: "img/[name][hash:8].[ext]"
+                            name: "img/[hash:16].[ext]"
                         }
                     }
                 ]
