@@ -6,8 +6,9 @@ var combineLoaders = require("webpack-combine-loaders");
 module.exports = {
     devtool: "cheap-module-eval-source-map",
     entry: [
+        "react-hot-loader/patch",
         "webpack-dev-server/client?http://0.0.0.0:9527", // WebpackDevServer host and port
-        "webpack/hot/dev-server", 
+        "webpack/hot/only-dev-server", 
         "./src/index.js" // Your appʼs entry point
     ],
     output: {
@@ -29,7 +30,7 @@ module.exports = {
                 ]
             },
             { 
-                test: /\.ttf$/,
+                test: /\.(ttf|eot|woff)$/,
                 use: [
                     {
                         loader: "file-loader",
@@ -97,6 +98,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
         new webpack.BannerPlugin({
             banner: "Created by KaiJun. :)"
         }),
