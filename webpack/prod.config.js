@@ -2,6 +2,8 @@ var path = require("path");
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var combineLoaders = require("webpack-combine-loaders");
+// var BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 
 module.exports = {
     devtool: "source-map",
@@ -26,13 +28,13 @@ module.exports = {
                     }
                 ]
             },
-            { 
-                test: /\.ttf$/,
+            {
+                test: /\.(ttf|eot|woff)$/,
                 use: [
                     {
                         loader: "file-loader",
                         options: {
-                            name: "font/[name].[ext]"
+                            name: "font/[hash:16].[ext]"
                         }
                     }
                 ],
@@ -47,7 +49,7 @@ module.exports = {
                         loader: "url-loader",
                         options: {
                             limit: 8192,
-                            name: "img/[name][hash:8].[ext]"
+                            name: "img/[hash:16].[ext]"
                         }
                     }
                 ]
@@ -94,6 +96,12 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        // new BundleAnalyzerPlugin(),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.BannerPlugin({
             banner: "Created by KaiJun. :)"
